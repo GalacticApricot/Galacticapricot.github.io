@@ -1,189 +1,312 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>My Portfolio</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GalacticApricot - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #999; /* Set background color to black */
-        color: #fff; /* Set default text color to white for contrast */
-        margin: 0;
-        padding: 0;
-      }
-
-      header {
-        background-color: #333;
-        color: #fff;
-        padding: 20px;
-        text-align: center;
-        animation: headerAnim 1s ease-in-out;
-      }
-
-      @keyframes headerAnim {
-        0% {
-          opacity: 0;
-          transform: translateY(-50px);
+        /* CSS Reset and Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
+
+        :root {
+            --primary-bg: #121212;
+            --secondary-bg: #1e1e1e;
+            --accent-color: #61DAFB; /* A bright, modern blue */
+            --text-color: #e0e0e0;
+            --heading-color: #fff;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            --transition-speed: 0.3s;
         }
-      }
 
-      header h1 {
-        font-size: 36px;
-        margin: 0;
-      }
-
-      nav {
-        background-color: #333;
-        color: #fff;
-        text-align: center;
-        animation: navAnim 1s ease-in-out;
-      }
-
-      @keyframes navAnim {
-        0% {
-          opacity: 0;
-          transform: translateX(-50px);
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
         }
-        100% {
-          opacity: 1;
-          transform: translateX(0);
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
-      }
 
-      nav ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-      }
+        /* --- Header & Navigation --- */
+        header {
+            background-color: var(--secondary-bg);
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-color);
+            animation: fadeIn 1s ease-in-out;
+        }
 
-      nav li {
-        margin-right: 20px;
-      }
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            margin: 0;
+            color: var(--heading-color);
+        }
 
-      nav a {
-        color: #fff;
-        text-decoration: none;
-        padding: 10px;
-        font-size: 18px;
-      }
+        nav {
+            background-color: var(--secondary-bg);
+            text-align: center;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-      main {
-        padding: 20px;
-        color: #000; /* Set text to black */
-      }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
 
-      section {
-        background-color: #fff; /* Make the section background white */
-        color: #000; /* Set section text to black */
-        padding: 20px;
-        margin-bottom: 20px;
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            position: relative;
+            transition: color var(--transition-speed);
+        }
 
-        /* Apply the specific box shadow you requested */
-        box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-        -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-        -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width var(--transition-speed);
+        }
 
-        border-radius: 0px; /* Remove border radius to make rectangular boxes */
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
+        nav a:hover {
+            color: var(--accent-color);
+        }
 
-      section:hover {
-        transform: translateZ(10px) scale(1.05); /* Pop out effect on hover */
-        box-shadow: 15px 15px 10px 0px rgba(0, 0, 0, 0.85); /* More intense shadow on hover */
-        -webkit-box-shadow: 15px 15px 10px 0px rgba(0, 0, 0, 0.85);
-        -moz-box-shadow: 15px 15px 10px 0px rgba(0, 0, 0, 0.85);
-      }
+        nav a:hover::after {
+            width: 100%;
+        }
 
-      h2 {
-        color: #000; /* Set section headings to white for contrast */
-        font-size: 24px;
-        margin-bottom: 20px;
-      }
+        /* --- Main Content --- */
+        main {
+            padding: 4rem 0;
+        }
 
-      footer {
-        background-color: #333;
-        color: #fff;
-        padding: 20px;
-        text-align: center;
-      }
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        section {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            animation: slideInUp 0.8s ease-in-out forwards;
+        }
+        
+        section:nth-of-type(1) { animation-delay: 0.1s; }
+        section:nth-of-type(2) { animation-delay: 0.2s; }
+        section:nth-of-type(3) { animation-delay: 0.3s; }
+        section:nth-of-type(4) { animation-delay: 0.4s; }
+        section:nth-of-type(5) { animation-delay: 0.5s; }
+
+        section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        ul {
+            list-style: none;
+        }
+        
+        ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        p, li {
+            font-size: 1rem;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        a:hover {
+            color: var(--heading-color);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--secondary-bg);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 2px solid var(--accent-color);
+            margin-top: 2rem;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            nav ul {
+                gap: 1rem;
+            }
+            main {
+                padding: 2rem 0;
+            }
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+            section {
+                margin-bottom: 1rem;
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <header>
-      <h1>GalacticApricot</h1>
+        <div class="container">
+            <h1>GalacticApricot</h1>
+        </div>
     </header>
+    
     <nav>
-      <ul>
-        <li><a href="#about">About Me</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#languages">Languages</a></li>
-        <li><a href="#contact">Contact Me</a></li>
-      </ul>
+        <div class="container">
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#languages">Languages</a></li>
+                <li><a href="#contact">Contact Me</a></li>
+            </ul>
+        </div>
     </nav>
+    
     <main>
-      <section id="about">
-        <h2>About Me</h2>
-        <p>I am 16 yrs old he/him. I speak English, Portuguese and Spanish. My time zone is London +00:00 GMT. I love programming. I am studying A-level Maths, Further Maths, Physics and Computer Science</p>
-      </section>
-      <section id="skills">
-        <h2>Skills</h2>
-        <ul>
-          <li>Backend Web Development</li>
-          <li>Discord Bots</li>
-          <li>Roblox Games</li>
-          <li>Arduino (C++)</li>
-          <li>Social Media Marketing</li>
-          <li>Discord Server Member Retention</li>
-        </ul>
-      </section>
-      <section id="projects">
-        <h2>Projects</h2>
-        <ul>
-          <li><a href="https://discord.gg/94me9pUaYb">Roblox developer hub</a></li>
-          <li><a href="">Human Embed Creator - not available</a></li>
-          <li><a href="https://galacticapricot.dev/blappyfird">Javascript Flappy Bird Demo Game</a></li>
-          <li><a href="https://github.com/GalacticApricot/Python-Flappy-Bird-Demo-Game">Python Flappy Bird Demo Game</a></li>
-          <li><a href="">Discord Webhook Deleter - not available</a></li>
-          <li><a href="https://github.com/GalacticApricot/Dllject/">Dll injector</a></li>
-          <li><a href="https://github.com/GalacticApricot/MCCHAT2DC">Minecraft Chat Logger</a></li>
-          <li><a href="https://github.com/GalacticApricot/OpenCV-X-PyGame-Demo/">OpenCV X PyGame Demo</a></li>
-        </ul>
-      </section>
-      <section id="languages">
-        <h2>Programming Languages I Use</h2>
-        <ul>
-          <li>Java</li>
-          <li>Python</li>
-          <li>Javascript</li>
-          <li>C++ (Arduino)</li>
-          <li>HTML / CSS / Javascript</li>
-          <li>node.js</li>
-          <li>Lua</li>
-          <li>Rust</li>
-          <li>electron.js</li>
-          <li>Godot</li>
-          <li>Bash</li>
-          <li>MicroPython</li>
-          <li>BasicLike</li>
-        </ul>
-      </section>
-      <section id="contact">
-        <h2>Contact Me</h2>
-        <ul>
-          <li>Discord: galacticapricot</li>
-          <li>Email: me@galacticapricot.dev</li>
-          <li>@GalacticApricot or @galacticapricot on everything else!</li>
-        </ul>
-      </section>
+        <div class="container section-grid">
+            <section id="about">
+                <h2>About Me</h2>
+                <p>I am a 17-year-old he/him living in the London (+00:00 GMT) timezone. I am passionate about programming and currently studying A-level Maths, Physics, and Computer Science. I am fluent in English, Portuguese, and Spanish. I want to continue working with Computer Science and Electronical Engineering</p>
+            </section>
+            
+            <section id="skills">
+                <h2>Skills</h2>
+                <ul>
+                    <li>Backend Web Development</li>
+                    <li>PC/Phone/Console Repair & Unlocking</li>
+                    <li>Discord Bots</li>
+                    <li>Roblox Games</li>
+                    <li>Arduino (C++)</li>
+                    <li>Social Media Marketing</li>
+                    <li>API Reverse Engineering</li>
+                    <li>Web Scraping</li>
+                    <li>Electronic Reverse Engineering</li>
+                    <li>Discord Server Member Retention</li>
+                </ul>
+            </section>
+            
+            <section id="projects">
+                <h2>Projects</h2>
+                <ul>
+                <li><a href="https://github.com/The-Developer-Project/Nyxie" target="_blank" rel="noopener noreferrer">Nyxie - Discord.js bot for roblox development</a></li>
+                <li><a href="https://github.com/The-Developer-Project/Lupyter-NoteBook" target="_blank" rel="noopener noreferrer">Lupyter Notebook - Jupyter Notebook for Roblox</a></li>
+                <li><a href="https://github.com/GalacticApricot/TextShotRoulette" target="_blank" rel="noopener noreferrer">Text based version of game "Buckshot Roulette"</a></li>
+                    <li><a href="https://discord.gg/94me9pUaYb" target="_blank" rel="noopener noreferrer">Roblox Developer Hub</a></li>
+                    <li><a href="https://galacticapricot.dev/blappyfird" target="_blank" rel="noopener noreferrer">Javascript Flappy Bird Demo Game</a></li>
+                    <li><a href="https://github.com/GalacticApricot/Python-Flappy-Bird-Demo-Game" target="_blank" rel="noopener noreferrer">Python Flappy Bird Demo Game</a></li>
+                    <li><a href="https://github.com/GalacticApricot/Dllject/" target="_blank" rel="noopener noreferrer">Dll Swapper</a></li>
+                    <li><a href="https://github.com/GalacticApricot/MCCHAT2DC" target="_blank" rel="noopener noreferrer">Minecraft Chat Logger</a></li>
+                    <li><a href="https://github.com/GalacticApricot/OpenCV-X-PyGame-Demo/" target="_blank" rel="noopener noreferrer">OpenCV X PyGame Demo</a></li>
+                    <li><a href="https://github.com/GalacticApricot/TXTBLIT" target="_blank" rel="noopener noreferrer">Python ASCII 2D Game Engine</a></li>
+                </ul>
+            </section>
+            
+            <section id="languages">
+                <h2>Programming Languages I Use</h2>
+                <ul>
+                    <li>Java</li>
+                    <li>Python</li>
+                    <li>Javascript</li>
+                    <li>C++ (Arduino)</li>
+                    <li>Lua</li>
+                    <li>Unity C#</li>
+                </ul>
+            </section>
+
+            <section id="frameworks">
+                <h2>Frameworks and Modules I Use</h2>
+                <ul>
+                    <li>Node.js</li>
+                    <li>Java Spring Boot</li>
+                    <li>Flask</li>
+                    <li>Open CV</li>
+                    <li>PyGame</li>
+                    <li>Discord.js</li>
+                    <li>LuaU</li>
+                    <li>Tesseract</li>
+
+                </ul>
+            </section>
+            
+            <section id="contact">
+                <h2>Contact Me</h2>
+                <ul>
+                    <li>Discord: galacticapricot</li>
+                    <li>Email: <a href="mailto:me@galacticapricot.dev">me@galacticapricot.dev</a></li>
+                    <li>On everything else: @GalacticApricot or @galacticapricot</li>
+                </ul>
+            </section>
+        </div>
     </main>
+    
     <footer>
-      <p>&copy; GalacticApricot</p>
+        <div class="container">
+            <p>&copy; GalacticApricot</p>
+        </div>
     </footer>
-  </body>
+</body>
 </html>
